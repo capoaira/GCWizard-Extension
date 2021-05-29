@@ -1,0 +1,103 @@
+{
+    "extension_name": {
+        "message": "GCWizard",
+        "description": "Name der Erweiterung."
+    },
+
+    "extension_dscription": {
+        "message": "GCWizard - Eine Erweiterung, um Zugriff auf die Tools des GCWizards zu erhalten und Rätsel auf geocaching.com zu lösen",
+        "description": "Beschreibung der Erweiterung."
+    },
+
+    "decrypt": {
+        "message": "Entschlüsseln",
+        "description": ""
+    },
+    "decryption_copied": {
+        "message": "Entschlüsselung kopiert",
+        "description": ""
+    },
+
+    "encrypt": {
+        "message": "Verschlüsseln",
+        "description": ""
+    },
+    "encryption_copied": {
+        "message": "Verschlüsselung kopiert",
+        "description": ""
+    },
+
+    "open_gc": {
+        "message": "Cache öffnen",
+        "description": ""
+    },
+    "open_tb": {
+        "message": "TB öffnen",
+        "description": ""
+    },
+    "open_bm": {
+        "message": "Lesezeichenliste öffnen",
+        "description": ""
+    },
+    "open_gt": {
+        "message": "GeoTour öffnen",
+        "description": ""
+    },
+    
+    "analyze": {
+        "message": "Analysieren",
+        "description": ""
+    },
+    "analyze_back_to_listing": {
+        "message": "Zurück zum Cache Listing",
+        "description": ""
+    },
+    "analyze_owner": {
+        "message": "Owner",
+        "description": ""
+    },
+    "analyze_pseudonym": {
+        "message": "Pseudonym",
+        "description": ""
+    },
+    "analyze_description": {
+        "message": "Cache Beschreibung",
+        "description": ""
+    },
+    "analyze_short_description": {
+        "message": "Kurzbeschreibung:",
+        "description": ""
+    },
+    "analyze_long_description": {
+        "message": "Ausführliche Beschreibung:",
+        "description": ""
+    },
+    "analyze_show_html_source": {
+        "message": "Zeige HTML-Quelltext",
+        "description": ""
+    },
+    "analyze_show_html_syntax": {
+        "message": "HTML-Syntax hervorheben",
+        "description": ""
+    },
+    "analyze_show_comments": {
+        "message": "Zeige HTML-Kommentare",
+        "description": ""
+    },
+    "analyze_no_comments": {
+        "message": "Die Beschreibung enthält keine HTML-Kommentare",
+        "description": ""
+    },
+    "analyze_hint": {
+        "message": "Hinweis",
+        "description": ""
+    },
+    "analyze_no_hint": {
+        "message": "Es gibt kein Hinweis",
+        "description": ""
+    },
+    "analyze_hint_without_colors": {
+        "message": "(ohne Style)",
+        "description": ""
+    }
+}

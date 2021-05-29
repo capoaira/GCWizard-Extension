@@ -1,0 +1,103 @@
+{
+    "extension_name": {
+        "message": "GCWizard",
+        "description": "Name of the extension."
+    },
+
+    "extension_description": {
+        "message": "GCWizard - An extension to get access to the tools of the GCWizard and solve mysterys on geocaching.com",
+        "description": "Description of the extension."
+    },
+
+    "decrypt": {
+        "message": "decrypt",
+        "description": ""
+    },
+    "decryption_copied": {
+        "message": "Decryption copied",
+        "description": ""
+    },
+
+    "encrypt": {
+        "message": "encrypt",
+        "description": ""
+    },
+    "encryption_copied": {
+        "message": "Encryption copied",
+        "description": ""
+    },
+
+    "open_gc": {
+        "message": "Open Cache",
+        "description": ""
+    },
+    "open_tb": {
+        "message": "Open TB",
+        "description": ""
+    },
+    "open_bm": {
+        "message": "Open List",
+        "description": ""
+    },
+    "open_gt": {
+        "message": "Open GeoTour",
+        "description": ""
+    },
+    
+    "analyze": {
+        "message": "Analyze",
+        "description": ""
+    },
+    "analyze_back_to_listing": {
+        "message": "Back to the cache listing",
+        "description": ""
+    },
+    "analyze_owner": {
+        "message": "Owner",
+        "description": ""
+    },
+    "analyze_pseudonym": {
+        "message": "Pseudonym",
+        "description": ""
+    },
+    "analyze_description": {
+        "message": "Cache Description",
+        "description": ""
+    },
+    "analyze_short_description": {
+        "message": "Short Description:",
+        "description": ""
+    },
+    "analyze_long_description": {
+        "message": "Long Description:",
+        "description": ""
+    },
+    "analyze_show_html_source": {
+        "message": "Show html source",
+        "description": ""
+    },
+    "analyze_show_html_syntax": {
+        "message": "Highlight html syntax",
+        "description": ""
+    },
+    "analyze_show_comments": {
+        "message": "Show html comments",
+        "description": ""
+    },
+    "analyze_no_comments": {
+        "message": "There are not html comments in the description",
+        "description": ""
+    },
+    "analyze_hint": {
+        "message": "Hint",
+        "description": ""
+    },
+    "analyze_no_hint": {
+        "message": "There is no Hint",
+        "description": ""
+    },
+    "analyze_hint_without_colors": {
+        "message": "(without style)",
+        "description": ""
+    }
+}

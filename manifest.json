@@ -1,0 +1,43 @@
+{
+    "name": "__MSG_extension_name__",
+    "description": "__MSG_extension_description__",
+    "version": "1.0",
+    "author": "GCWizard",
+    "homepage_url": "https://blog.gcwizard.net",
+    "default_locale": "en",
+    "manifest_version": 2,
+    "icons": {
+        "16": "icons/logo-16.png",
+        "32": "icons/logo-32.png",
+        "48": "icons/logo-48.png",
+        "128": "icons/logo-128.png"
+    },
+
+    "permissions": [
+        "activeTab",
+        "contextMenus",
+        "clipboardWrite",
+        "storage",
+        "<all_urls>"
+    ],
+
+    "background": {
+        "scripts": [
+            "libs/dist/browser-polyfill.min.js",
+            "js/background.js"
+        ]
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["*://*/*"],
+            "js": [
+                "libs/dist/browser-polyfill.min.js",
+                "libs/jquery.min.js",
+                "js/content.js"
+            ],
+            "css": ["css/style.css"],
+            "run_at": "document_end"
+        }
+    ]
+}
