@@ -1,151 +1,151 @@
 /* GCW Popup */
 #gcw_popup {
-    position: fixed;
-    display: none;
-    top: 3em;
-    left: 50%;
-    transform: translate(-50%, 0);
-    margin: auto;
-    width: min-content;
-    background: rgba(31, 31, 31, 1);
-    padding: 1em;
-    border-radius: 1em;
-    z-index: 1001;
+  position: fixed;
+  display: none;
+  top: 3em;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin: auto;
+  width: min-content;
+  background: rgba(31, 31, 31, 1);
+  padding: 1em;
+  border-radius: 1em;
+  z-index: 1001;
 }
-    
+
 #gcw_popup_msg {
-    color: orange;
-    white-space: nowrap;
+  color: orange;
+  white-space: nowrap;
 }
 
 /* Analyze Page */
 #gcw_analyze {
-    position: fixed;
-    display: none;
-    top: 0;
-    overflow-y: scroll;
-    background: #fff;
-    height: calc(100% - 2em); /* (100% - padding) */
-    width: calc(100% - 8em); /* (100% - padding) */
-    padding: 1em 4em;
-    z-index: 1000;
+  position: fixed;
+  display: none;
+  top: 0;
+  overflow-y: scroll;
+  background: #fff;
+  height: calc(100% - 2em); /* (100% - padding) */
+  width: calc(100% - 8em); /* (100% - padding) */
+  padding: 1em 4em;
+  z-index: 1000;
 }
 
 #gcw_analyze h1 {
-    margin: .5em 0;
+  margin: 0.5em 0;
 }
 
 #gcw_analyze_owner {
-    display: grid;
-    grid-template-columns: min-content 1fr;
-    column-gap: 1em;
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  column-gap: 1em;
 }
 
 #gcw_analyze_listing {
-    border: 2px solid #fa5;
+  border: 2px solid #fa5;
 }
 
 #gcw_analyze_listing legend {
-    padding: 0 .5em;
+  padding: 0 0.5em;
 }
 
 .gcw_html_comment {
-    color: green;
+  color: green;
 }
 .gcw_html_tag {
-    color: blue;
+  color: blue;
 }
 .gcw_html_attr {
-    color: red;
+  color: red;
 }
 .gcw_html_equal_sign {
-    color: black;
+  color: black;
 }
 .gcw_html_value {
-    color: #70c;
+  color: #70c;
 }
 .gcw_html_unicode {
-    color: gray;
-    font-style: italic;
+  color: gray;
+  font-style: italic;
 }
 
 .gcw_toggle {
-    padding-left: 1em;
-    margin-bottom: 1em;
+  padding-left: 1em;
+  margin-bottom: 1em;
 }
 
 .gcw_toggle label {
-    position: relative;
-    display: inline-block;
-    text-transform: none;
+  position: relative;
+  display: inline-block;
+  text-transform: none;
 }
 
 .gcw_toggle input {
-    display: none;
+  display: none;
 }
 
 .gcw_toggle .slider {
-    position: absolute;
-    cursor: pointer;
-    margin-left: .5em;
-    width: 2.2em;
-    height: 1em;
-    background: rgba(255, 170, 85, .5);
-    transition: all .3s ease-in-out;
-    border-radius: 1em;
+  position: absolute;
+  cursor: pointer;
+  margin-left: 0.5em;
+  width: 2.2em;
+  height: 1em;
+  background: rgba(255, 170, 85, 0.5);
+  transition: all 0.3s ease-in-out;
+  border-radius: 1em;
 }
 
 .gcw_toggle .slider:before {
-    position: absolute;
-    content: "";
-    height: 1.3em;
-    width: 1.3em;
-    left: 0em;
-    bottom: -.15em;
-    background: #fa5;
-    border-radius: 50%;
-    transition: all .3s ease-in-out;
+  position: absolute;
+  content: '';
+  height: 1.3em;
+  width: 1.3em;
+  left: 0em;
+  bottom: -0.15em;
+  background: #fa5;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
 }
 
 .gcw_toggle input:checked + .slider {
-    background: rgba(255, 170, 85, .5);
+  background: rgba(255, 170, 85, 0.5);
 }
 
 .gcw_toggle input:checked + .slider:before {
-    -webkit-transform: translateX(1em);
-    -ms-transform: translateX(1em);
-    transform: translateX(1em);
+  -webkit-transform: translateX(1em);
+  -ms-transform: translateX(1em);
+  transform: translateX(1em);
 }
 
 .gcw_toggel_warn {
-    padding-left: 3em;
+  padding-left: 3em;
 }
 
 .gcw_info {
-    display: none;
+  display: none;
 }
 
 input.gcw_info:checked + div.gcw_info {
-    display: block;
+  display: block;
 }
 
 div.gcw_info {
-    margin: 0 0 1em 1em;
+  margin: 0 0 1em 1em;
 }
 
 .gcw_btn_info {
-    width: 1.5em;
-    height: 1.5em;
-    padding-left: .3em;
-    margin-left:3em;
-    border: 2px solid #fa5;
-    border-radius:50%;
-    color: #fa5;
-    font-weight: bold;
-    cursor: pointer;
-    box-sizing: border-box;
+  width: 1.5em;
+  height: 1.5em;
+  padding-left: 0.3em;
+  margin-left: 3em;
+  border: 2px solid #fa5;
+  border-radius: 50%;
+  color: #fa5;
+  font-weight: bold;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
 .gcw_btn_info:hover {
-    background: rgba(255, 170, 85, .5);
+  background: rgba(255, 170, 85, 0.5);
 }
