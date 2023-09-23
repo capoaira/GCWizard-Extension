@@ -73,19 +73,23 @@
         "description": ""
     },
     "analyze_show_html_source": {
-        "message": "Show html source",
+        "message": "Show HTML source",
         "description": ""
     },
     "analyze_show_html_syntax": {
-        "message": "Highlight html syntax",
+        "message": "Highlight HTML syntax",
+        "description": ""
+    },
+    "analyze_show_html_format": {
+        "message": "Format HTML",
         "description": ""
     },
     "analyze_show_comments": {
-        "message": "Show html comments",
+        "message": "Show HTML comments",
         "description": ""
     },
     "analyze_no_comments": {
-        "message": "There are not html comments in the description",
+        "message": "There are not HTML comments in the description",
         "description": ""
     },
     "analyze_hint": {

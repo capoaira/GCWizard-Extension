@@ -55,10 +55,11 @@ GCW.loadSettings = function () {
   function onError(e) {
     console.error('GCW Error: ' + e);
   }
-  function onGot(val) {
+  function onGet(val) {
     // Default values
-    GCW.settings['analyze_html_source'] = false;
     GCW.settings['analyze_show_comments'] = false;
+    GCW.settings['analyze_html_source'] = false;
+    GCW.settings['analyze_html_format'] = true;
     GCW.settings['analyze_html_syntax'] = true;
     // Load values
     for (var key in val) {
@@ -66,7 +67,7 @@ GCW.loadSettings = function () {
     }
   }
   let gettingItem = browser.storage.local.get();
-  gettingItem.then(onGot, onError);
+  gettingItem.then(onGet, onError);
 };
 GCW.setVal = function (key, val) {
   let obj = {};
@@ -134,7 +135,7 @@ GCW.main = function () {
       GCW.i18n('extension_name') +
       '</h3>' +
       '    <div class="WidgetBody">' +
-      "        <a href=\"javascript:void(0)\" onclick=\"$('#gcw_analyze').show('slow');$('#aspnetForm').hide('slow');\">" +
+      '        <a href="javascript:void(0)" onclick="$(\'#gcw_analyze\').show();$(\'#aspnetForm\').hide();">' +
       GCW.i18n('analyze') +
       '</a>' +
       '    </div>' +
@@ -150,6 +151,10 @@ GCW.main = function () {
       GCW.setVal('analyze_html_source', $('#analyze_html_source').is(':checked'));
       changehtml(GCW.getVal('analyze_html_source'));
     }
+    function toggelHtmlFormat() {
+      GCW.setVal('analyze_html_format', $('#analyze_html_format').is(':checked'));
+      changehtml(GCW.getVal('analyze_html_source'));
+    }
     function toggelHtmlColors() {
       GCW.setVal('analyze_html_syntax', $('#analyze_html_syntax').is(':checked'));
       changehtml(GCW.getVal('analyze_html_source'));
@@ -157,9 +162,10 @@ GCW.main = function () {
     function changehtml(isSource) {
       // Note dependency when switch to source code | Has to run BEFORE changehtml()
       if (GCW.getVal('analyze_html_source')) {
-        $('#analyze_show_comments').parents('.gcw_toggle').hide('slow');
+        $('#analyze_show_comments').parents('.gcw_toggle').hide();
         changeComments(false);
-        $('#analyze_html_syntax').parents('.gcw_toggle').show('slow');
+        $('#analyze_html_syntax').parents('.gcw_toggle').show();
+        $('#analyze_html_format').parents('.gcw_toggle').show();
       }
       // Change the html
       let html = '';
@@ -176,10 +182,45 @@ GCW.main = function () {
             GCW.i18n('analyze_long_description') +
             '</h3>';
         }
-        html += '<span>' + $('#ctl00_ContentBody_LongDescription').html().toHtmlEntities() + '</span>';
+        let description = $('#ctl00_ContentBody_LongDescription').html().toHtmlEntities();
+        if (GCW.getVal('analyze_html_format')) {
+          function formatHTML(html, intend = 0) {
+            // Leere Tags abfangen
+            if (!html) return '';
+            // Handel line Breaks
+            html = html.replace(/(?<!\n)\s*(&#60;br[ \/]{0,2}&#62;<br[ \/]{0,2}>)/g, '$1' + '&nbsp'.repeat(4));
+            // Regex
+            let regex = /&#60;([a-zA-Z]+)((?:"[^"]*"|'[^']*'|[^'"&#62;])*&#62;)((?:(?!\1&#62;.*?&#60;\1).)*)(&#60;\/\1&#62;)/gs;
+            let result = [];
+            let match;
+            while ((match = regex.exec(html)) !== null) {
+              const [fullMatch, openingTag, attributes, innerHTML, closingTag] = match;
+              result.push(
+                '&#60;' +
+                  openingTag +
+                  attributes +
+                  (fullMatch.length > 90
+                    ? '<br />' +
+                      '&nbsp'.repeat(4 * (intend + 1)) +
+                      formatHTML(innerHTML, intend + 1) +
+                      '<br />' +
+                      '&nbsp'.repeat(4 * intend) +
+                      closingTag
+                    : innerHTML + closingTag)
+              );
+            }
+            console.log('intend', intend);
+            console.log('länge', result.length);
+            return result.length == 0 ? html : result.join('<br />' + '&nbsp'.repeat(4 * intend));
+          }
+
+          // Handel line breaks
+          description = description.replace(/(&#60;br[ \/]{0,2}&#62;)/g, '$1<br>');
+          description = formatHTML(description);
+        }
         if (GCW.getVal('analyze_html_syntax')) {
           // Highlight tags
-          html = html.replace(/&#60;("[^"]*"|'[^']*'|[^'"&#62;])*&#62;/gm, function (match) {
+          description = description.replace(/&#60;("[^"]*"|'[^']*'|[^'"&#62;])*&#62;/gm, function (match) {
             match = match.replace(
               /(\w+)(=)(".*?")/gm,
               '<span class="gcw_html_attr">$1<span class="gcw_html_equal_sign">$2</span><span class="gcw_html_value">$3</span></span>'
@@ -187,10 +228,11 @@ GCW.main = function () {
             return '<span class="gcw_html_tag">' + match + '</span>';
           });
           // Highlight comments
-          html = html.replace(/(&#60;!--.*?--&#62;)/gm, '<span class="gcw_html_comment">$&</span>');
-          // Highlight &...;
-          html = html.replace(/&#38;\w+;/gm, '<span class="gcw_html_unicode">$&</span>');
+          description = description.replace(/(&#60;!--.*?--&#62;)/gm, '<span class="gcw_html_comment">$&</span>');
+          // Highlight '&...;'
+          description = description.replace(/&#38;\w+;/gm, '<span class="gcw_html_unicode">$&</span>');
         }
+        html += '<span>' + description + '</span>';
         $('#gcw_analyze_listing_content').html(html);
       } else {
         if ($('#ctl00_ContentBody_ShortDescription').html().trim() !== '') {
@@ -203,9 +245,10 @@ GCW.main = function () {
       }
       // Note dependency when switch to html view | Has to run AFTER changehtml()
       if (!GCW.getVal('analyze_html_source')) {
-        $('#analyze_show_comments').parents('.gcw_toggle').show('slow');
+        $('#analyze_show_comments').parents('.gcw_toggle').show();
         changeComments(GCW.getVal('analyze_show_comments'));
-        $('#analyze_html_syntax').parents('.gcw_toggle').hide('slow');
+        $('#analyze_html_syntax').parents('.gcw_toggle').hide();
+        $('#analyze_html_format').parents('.gcw_toggle').hide();
       }
     }
 
@@ -250,7 +293,7 @@ GCW.main = function () {
     // Add the html of the GCW analyze page
     let html =
       '<div id="gcw_analyze"><div style="margin:auto;width: max-content;">' +
-      "    <h1><a id=\"gcw_link_back\" href=\"javascript:void(0)\" onclick=\"$('#gcw_analyze').hide('slow');$('#aspnetForm').show('slow');\">&lt;= " +
+      '    <h1><a id="gcw_link_back" href="javascript:void(0)" onclick="$(\'#gcw_analyze\').hide();$(\'#aspnetForm\').show();">&lt;= ' +
       GCW.i18n('analyze_back_to_listing') +
       '</a></h1>' +
       '    <h1>' +
@@ -276,12 +319,13 @@ GCW.main = function () {
       GCW.buildToggle('analyze_html_source', GCW.i18n('analyze_show_html_source')) +
       GCW.buildToggle('analyze_show_comments', GCW.i18n('analyze_show_comments')) +
       GCW.buildToggle('analyze_html_syntax', GCW.i18n('analyze_show_html_syntax')) +
-      '    <fieldset id="gcw_analyze_listing">' +
-      '        <legend>' +
+      GCW.buildToggle('analyze_html_format', GCW.i18n('analyze_show_html_format')) +
+      '        <h3>' +
       GCW.i18n('analyze_description') +
-      '</legend>' +
+      '</h3>' +
+      '    <div id="gcw_analyze_listing">' +
       '        <div id="gcw_analyze_listing_content"></div>' +
-      '    </fieldset>' +
+      '    </div>' +
       '    <div id="gcw_analyze_hint">' +
       '        <div style="display:flex;align-items:center;gap:1em;"><h1>' +
       GCW.i18n('analyze_hint') +
@@ -299,6 +343,7 @@ GCW.main = function () {
     changehtml(GCW.getVal('analyze_html_source'));
     $('#analyze_show_comments').bind('click', toggelComments);
     $('#analyze_html_syntax').bind('click', toggelHtmlColors);
+    $('#analyze_html_format').bind('click', toggelHtmlFormat);
     // Set width of listing
     $('#gcw_analyze_listing').css('width', $('.UserSuppliedContent')[0].offsetWidth);
   }

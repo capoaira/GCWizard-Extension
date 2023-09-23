@@ -80,6 +80,10 @@
         "message": "HTML-Syntax hervorheben",
         "description": ""
     },
+    "analyze_show_html_format": {
+        "message": "HTML formatieren",
+        "description": ""
+    },
     "analyze_show_comments": {
         "message": "Zeige HTML-Kommentare",
         "description": ""
