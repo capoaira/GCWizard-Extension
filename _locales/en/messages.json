@@ -9,99 +9,78 @@
         "description": "Description of the extension."
     },
 
-    "decrypt": {
-        "message": "decrypt",
-        "description": ""
-    },
-    "decryption_copied": {
-        "message": "Decryption copied",
-        "description": ""
+    "decode": {
+        "message": "Decode"
     },
 
-    "encrypt": {
-        "message": "encrypt",
-        "description": ""
-    },
-    "encryption_copied": {
-        "message": "Encryption copied",
-        "description": ""
+    "encode": {
+        "message": "Encode"
     },
 
     "open_gc": {
-        "message": "Open Cache",
-        "description": ""
+        "message": "Open Cache"
     },
     "open_tb": {
-        "message": "Open TB",
-        "description": ""
+        "message": "Open TB"
     },
     "open_bm": {
-        "message": "Open List",
-        "description": ""
+        "message": "Open List"
     },
     "open_gt": {
-        "message": "Open GeoTour",
-        "description": ""
+        "message": "Open GeoTour"
     },
     
     "analyze": {
-        "message": "Analyze",
-        "description": ""
+        "message": "Analyze"
     },
     "analyze_back_to_listing": {
-        "message": "Back to the cache listing",
-        "description": ""
+        "message": "Back to the cache listing"
     },
     "analyze_owner": {
-        "message": "Owner",
-        "description": ""
+        "message": "Owner"
     },
     "analyze_pseudonym": {
-        "message": "Pseudonym",
-        "description": ""
+        "message": "Pseudonym"
     },
     "analyze_description": {
-        "message": "Cache Description",
-        "description": ""
+        "message": "Cache Description"
     },
     "analyze_short_description": {
-        "message": "Short Description:",
-        "description": ""
+        "message": "Short Description:"
     },
     "analyze_long_description": {
-        "message": "Long Description:",
-        "description": ""
+        "message": "Long Description:"
     },
     "analyze_show_html_source": {
-        "message": "Show HTML source",
-        "description": ""
+        "message": "Show HTML source"
     },
     "analyze_show_html_syntax": {
-        "message": "Highlight HTML syntax",
-        "description": ""
+        "message": "Highlight HTML syntax"
     },
     "analyze_show_html_format": {
-        "message": "Format HTML",
-        "description": ""
+        "message": "Format HTML"
     },
     "analyze_show_comments": {
-        "message": "Show HTML comments",
-        "description": ""
+        "message": "Show HTML comments"
     },
     "analyze_no_comments": {
-        "message": "There are not HTML comments in the description",
-        "description": ""
+        "message": "There are not HTML comments in the description"
     },
     "analyze_hint": {
-        "message": "Hint",
-        "description": ""
+        "message": "Hint"
     },
     "analyze_no_hint": {
-        "message": "There is no Hint",
-        "description": ""
+        "message": "There is no Hint"
     },
     "analyze_hint_without_colors": {
-        "message": "(without style)",
-        "description": ""
+        "message": "(without style)"
+    },
+    
+    "open_gcw":{
+        "message": "Open with GCW"
+    },
+
+    "alphabetvalues": {
+        "message": "Alphabet Values"
     }
 }

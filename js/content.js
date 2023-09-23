@@ -13,6 +13,12 @@ function getMessage(data) {
     window.open(data.href);
     return Promise.resolve({ response: 'open ' + data.href });
   }
+  if (data.do === 'openGCW') {
+    let link = `https://gcwizard.net/#/${data.tool}?${toQueryString(data.params)}`;
+    console.log(link);
+    window.open(link);
+    return Promise.resolve({ response: 'open ' + data.tool });
+  }
   return Promise.resolve({ response: 'did nothing' });
 }
 
@@ -43,6 +49,20 @@ String.prototype.decodeUnicodeURIComponent = function () {
     });
   }
   return decodeURIComponent(unicodeToChar(this));
+};
+
+const toQueryString = function (obj) {
+  return Object.keys(obj)
+    .map((key) => {
+      const value = obj[key];
+      if (Array.isArray(value)) {
+        // Wenn der Wert ein Array ist (z. B. für 'values'), wandeln wir es in eine kommagetrennte Zeichenkette um
+        return `${encodeURIComponent(key)}=${value.map(encodeURIComponent).join(',')}`;
+      }
+      // Andernfalls kodieren wir den Wert und den Schlüssel und fügen sie dem Query-String hinzu
+      return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+    })
+    .join('&');
 };
 
 // GCW related constants and functions

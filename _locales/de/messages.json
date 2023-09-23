@@ -9,99 +9,99 @@
         "description": "Beschreibung der Erweiterung."
     },
 
-    "decrypt": {
-        "message": "Entschlüsseln",
-        "description": ""
-    },
-    "decryption_copied": {
-        "message": "Entschlüsselung kopiert",
-        "description": ""
+    "decode": {
+        "message": "Entschlüsseln"
     },
 
-    "encrypt": {
-        "message": "Verschlüsseln",
-        "description": ""
-    },
-    "encryption_copied": {
-        "message": "Verschlüsselung kopiert",
-        "description": ""
+    "encode": {
+        "message": "Verschlüsseln"
     },
 
     "open_gc": {
-        "message": "Cache öffnen",
-        "description": ""
+        "message": "Cache öffnen"
     },
     "open_tb": {
-        "message": "TB öffnen",
-        "description": ""
+        "message": "TB öffnen"
     },
     "open_bm": {
-        "message": "Lesezeichenliste öffnen",
-        "description": ""
+        "message": "Lesezeichenliste öffnen"
     },
     "open_gt": {
-        "message": "GeoTour öffnen",
-        "description": ""
+        "message": "GeoTour öffnen"
     },
     
     "analyze": {
-        "message": "Analysieren",
-        "description": ""
+        "message": "Analysieren"
     },
     "analyze_back_to_listing": {
-        "message": "Zurück zum Cache Listing",
-        "description": ""
+        "message": "Zurück zum Cache Listing"
     },
     "analyze_owner": {
-        "message": "Owner",
-        "description": ""
+        "message": "Owner"
     },
     "analyze_pseudonym": {
-        "message": "Pseudonym",
-        "description": ""
+        "message": "Pseudonym"
     },
     "analyze_description": {
-        "message": "Cache Beschreibung",
-        "description": ""
+        "message": "Cache Beschreibung"
     },
     "analyze_short_description": {
-        "message": "Kurzbeschreibung:",
-        "description": ""
+        "message": "Kurzbeschreibung:"
     },
     "analyze_long_description": {
-        "message": "Ausführliche Beschreibung:",
-        "description": ""
+        "message": "Ausführliche Beschreibung:"
     },
     "analyze_show_html_source": {
-        "message": "Zeige HTML-Quelltext",
-        "description": ""
+        "message": "Zeige HTML-Quelltext"
     },
     "analyze_show_html_syntax": {
-        "message": "HTML-Syntax hervorheben",
-        "description": ""
+        "message": "HTML-Syntax hervorheben"
     },
     "analyze_show_html_format": {
-        "message": "HTML formatieren",
-        "description": ""
+        "message": "HTML formatieren"
     },
     "analyze_show_comments": {
-        "message": "Zeige HTML-Kommentare",
-        "description": ""
+        "message": "Zeige HTML-Kommentare"
     },
     "analyze_no_comments": {
-        "message": "Die Beschreibung enthält keine HTML-Kommentare",
-        "description": ""
+        "message": "Die Beschreibung enthält keine HTML-Kommentare"
     },
     "analyze_hint": {
-        "message": "Hinweis",
-        "description": ""
+        "message": "Hinweis"
     },
     "analyze_no_hint": {
-        "message": "Es gibt kein Hinweis",
-        "description": ""
+        "message": "Es gibt kein Hinweis"
     },
     "analyze_hint_without_colors": {
-        "message": "(ohne Style)",
-        "description": ""
+        "message": "(ohne Style)"
+    },
+
+    "open_gcw":{
+        "message": "Mit GCW öffnen"
+    },
+
+    "alphabetvalues": {
+        "message": "Buchstabenwerte"
+    },
+    "base16": {
+        "message": "Base 16"
+    },
+    "base32": {
+        "message": "Base 32"
+    },
+    "base58": {
+        "message": "Base 58"
+    },
+    "base64": {
+        "message": "Base 64"
+    },
+    "base85": {
+        "message": "Base 85"
+    },
+    "base91": {
+        "message": "Base 91"
+    },
+    "base122": {
+        "message": "Base 122"
     }
 }
