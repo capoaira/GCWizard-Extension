@@ -1,3 +1,37 @@
+/* Define color theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #33333d;
+    --text-color: #fff;
+    --highlight-color: #ffab40;
+    /* html syntax hightligth */
+    --html-comment: #6a9955;
+    --html-tag: #569cd6;
+    --html-key: #9cdcfe;
+    --html-equal-sign: #ccc;
+    --html-value: #ce9178;
+    --html-unicode: #569cd6;
+    /*--shadow-color: #999;
+    --highlight: #cdcdcd;
+    --primary: hsl(12, 70%, 50%);*/
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: #f5f3ed;
+    --text-color: #000;
+    --highlight-color: #ffab40;
+    /* html syntax hightligth */
+    --html-comment: #008000;
+    --html-tag: #800000;
+    --html-key: #e50000;
+    --html-equal-sign: #3b3b3b;
+    --html-value: #0000ff;
+    --html-unicode: #0000ff;
+  }
+}
+
 /* GCW Popup */
 #gcw_popup {
   position: fixed;
@@ -7,14 +41,15 @@
   transform: translate(-50%, 0);
   margin: auto;
   width: min-content;
-  background: rgba(31, 31, 31, 1);
+  background: var(--background-color);
+  color: var(--text-color);
   padding: 1em;
   border-radius: 1em;
   z-index: 1001;
 }
 
 #gcw_popup_msg {
-  color: orange;
+  color: var(--text-color);
   white-space: nowrap;
 }
 
@@ -24,7 +59,8 @@
   display: none;
   top: 0;
   overflow-y: scroll;
-  background: #fff;
+  background: var(--background-color);
+  color: var(--text-color);
   height: calc(100% - 2em); /* (100% - padding) */
   width: calc(100% - 8em); /* (100% - padding) */
   padding: 1em 4em;
@@ -35,6 +71,10 @@
   margin: 0.5em 0;
 }
 
+#gcw_analyze a {
+  color: var(--highlight-color)
+}
+
 #gcw_analyze_owner {
   display: grid;
   grid-template-columns: min-content 1fr;
@@ -42,7 +82,8 @@
 }
 
 #gcw_analyze_listing {
-  border: 2px solid #fa5;
+  border: 2px solid var(--highlight-color);
+  padding: .5em;
 }
 
 #gcw_analyze_listing legend {
@@ -50,22 +91,22 @@
 }
 
 .gcw_html_comment {
-  color: green;
+  color: var(--html-comment);
 }
 .gcw_html_tag {
-  color: blue;
+  color: var(--html-tag);
 }
-.gcw_html_attr {
-  color: red;
+.gcw_html_key {
+  color: var(--html-key);
 }
 .gcw_html_equal_sign {
-  color: black;
+  color: var(--html-equal-sign);
 }
 .gcw_html_value {
-  color: #70c;
+  color: var(--html-value);
 }
 .gcw_html_unicode {
-  color: gray;
+  color: var(--html-unicode);
   font-style: italic;
 }
 

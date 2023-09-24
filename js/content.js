@@ -243,7 +243,7 @@ GCW.main = function () {
           description = description.replace(/&#60;("[^"]*"|'[^']*'|[^'"&#62;])*&#62;/gm, function (match) {
             match = match.replace(
               /(\w+)(=)(".*?")/gm,
-              '<span class="gcw_html_attr">$1<span class="gcw_html_equal_sign">$2</span><span class="gcw_html_value">$3</span></span>'
+              '<span class="gcw_html_key">$1</span><span class="gcw_html_equal_sign">$2</span><span class="gcw_html_value">$3</span>'
             );
             return '<span class="gcw_html_tag">' + match + '</span>';
           });
