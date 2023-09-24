@@ -83,25 +83,103 @@
     "alphabetvalues": {
         "message": "Buchstabenwerte"
     },
-    "base16": {
+    "atbash": {
+        "message": "Atbasch"
+    },
+    "base": {
+        "message": "Base"
+    },
+    "base_base16": {
         "message": "Base 16"
     },
-    "base32": {
+    "base_base32": {
         "message": "Base 32"
     },
-    "base58": {
+    "base_base58": {
         "message": "Base 58"
     },
-    "base64": {
+    "base_base64": {
         "message": "Base 64"
     },
-    "base85": {
-        "message": "Base 85"
+    "base_base85": {
+        "message": "Base 85 (ASCII85)"
     },
-    "base91": {
+    "base_base91": {
         "message": "Base 91"
     },
-    "base122": {
+    "base_base122": {
         "message": "Base 122"
+    },
+    "caesar": {
+        "message": "Caesar Chiffre"
+    },
+    "morse": {
+        "message": "Morse"
+    },
+    "multidecoder": {
+        "message": "Multi-Dekodierer"
+    },
+    "onetimepad": {
+        "message": "One-Time Pad"
+    },
+    "playfair": {
+        "message": "Playfair"
+    },
+    "romannumbers": {
+        "message": "Römische Zahlen"
+    },
+    "rotation": {
+        "message": "Rotation"
+    },
+    "rotation_general": {
+        "message": "Rotation Gernal"
+    },
+    "rotation_rot13": {
+        "message": "ROT-13"
+    },
+    "rotation_rot18": {
+        "message": "ROT-18"
+    },
+    "rotation_rot47": {
+        "message": "ROT-47"
+    },
+    "rotation_rot5": {
+        "message": "ROT-5"
+    },
+    "substitutionbreaker": {
+        "message": "Codelöser für Textersetzungen"
+    },
+    "tapir": {
+        "message": "Tapir"
+    },
+    "vigenere": {
+        "message": "Vigenère Chiffre"
+    },
+    "de": {
+        "message": "Deutsch"
+    },
+    "en": {
+        "message": "Englisch"
+    },
+    "nl": {
+        "message": "Niederländisch"
+    },
+    "es": {
+        "message": "Spanisch"
+    },
+    "pl": {
+        "message": "Polnisch"
+    },
+    "gr": {
+        "message": "Griechisch"
+    },
+    "el": {
+        "message": "Griechisch"
+    },
+    "fr": {
+        "message": "Französisch"
+    },
+    "ru": {
+        "message": "Russisch"
     }
 }

@@ -1,0 +1,802 @@
+[
+  {
+    "/alphabetvalues" : {
+      "alternative_paths": ["alphabet_values", "av", "buchstabenwerte", "bww"],
+      "get": {
+        "summary": "Alphabet Values Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for encoding or decoding text",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode; 'encode' is for letters to values, 'decode' is for values to letters",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "encode"
+            }
+          }
+        ] 
+      }
+    }
+  },
+  {
+    "/atbash" : {
+      "alternative_paths": ["atbasch"],
+      "get": {
+        "summary": "Atbash Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Atbash text",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/base_base122" : {
+      "alternative_paths": ["base122"],
+      "get": {
+        "summary": "Base122 Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Base122 text",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/base_base16" : {
+      "alternative_paths": ["base16"],
+      "get": {
+        "summary": "Base16 Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Base16 text",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/base_base32" : {
+      "alternative_paths": ["base32"],
+      "get": {
+        "summary": "Base32 Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Base32 text",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/base_base58" : {
+      "alternative_paths": ["base58"],
+      "get": {
+        "summary": "Base58 Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Base58 text",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/base_base64" : {
+      "alternative_paths": ["base64"],
+      "get": {
+        "summary": "Base64 Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Base64 text",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/base_base85" : {
+      "alternative_paths": ["base85"],
+      "get": {
+        "summary": "Base85 Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Base85 text",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/base_base91" : {
+      "alternative_paths": ["base91"],
+      "get": {
+        "summary": "Base91 Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Base91 text",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/caesar" : {
+      "get": {
+        "summary": "Caesar Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "key",
+            "description": "Shifts the input for n alphabet places",
+            "schema": {
+              "type": "integer",
+              "default": 13
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/morse" : {
+      "get": {
+        "summary": "Morse Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for encoding or decoding Morse",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/multidecoder" : {
+      "get": {
+        "summary": "Multi Decoder Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for decoding text",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/onetimepad" : {
+      "alternative_paths": ["otp", "one_time_pad"],
+      "get": {
+        "summary": "OneTimePad Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for OneTimePad text",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "key",
+            "required": true,
+            "description": "OTP key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "a",
+            "required": true,
+            "description": "Value for letter A",
+            "schema": {
+              "type": "integer"
+            },
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/playfair" : {
+      "get": {
+        "summary": "Playfair Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "key",
+            "required": true,
+            "description": "Playfair key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/romannumbers" : {
+      "alternative_paths": ["roman"],
+      "get": {
+        "summary": "Roman Numbers Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Roman Numbers text; 'schema/type' is 'string' if 'parameters/mode/' is 'decode' and 'integer' otherwise.",
+            "schema": {}
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/rotation_general" : {
+      "alternative_paths": ["rotation", "rot", "rotx"],
+      "get": {
+        "summary": "Rotation Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for rotate text",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "key",
+            "description": "Shifts the input for n alphabet places",
+            "schema": {
+              "type": "integer",
+              "default": 13
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/rotation_rot18" : {
+      "alternative_paths": ["rot18"],
+      "get": {
+        "summary": "Rot18 Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Rot18 text",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/rotation_rot47" : {
+      "alternative_paths": ["rot47"],
+      "get": {
+        "summary": "Rot47 Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Rot47 text",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/rotation_rot5" : {
+      "alternative_paths": ["rot5"],
+      "get": {
+        "summary": "Rot5 Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data for Rot5 text",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/substitutionbreaker" : {
+      "alternative_paths": ["substitution_breaker", "substbreaker", "substbreak", "subst_breaker", "subst_break"],
+      "get": {
+        "summary": "Substitution Breaker Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "lang",
+            "description": "Defines language to break",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "de", "en", "nl", "es", "pl", "gr", "el", "fr", "ru"
+              ],
+              "default": "en"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/tapir" : {
+      "get": {
+        "summary": "Tapir Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "key",
+            "description": "OneTimePad key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "/vigenere" : {
+      "get": {
+        "summary": "Vigenère Tool",
+        "responses": {
+          "204": {
+            "description": "Tool loaded. No response data."
+          }
+        },
+        "parameters" : [
+          {
+            "in": "query",
+            "name": "input",
+            "required": true,
+            "description": "Input data",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "key",
+            "required": true,
+            "description": "Vigenère key",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "a",
+            "required": true,
+            "description": "Value for letter A",
+            "schema": {
+              "type": "integer"
+            },
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "Defines encoding or decoding mode",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "encode",
+                "decode"
+              ],
+              "default": "decode"
+            }
+          }
+        ]
+      }
+    }
+  }
+]

@@ -27,109 +27,62 @@ function sendMessage(tabId, msg) {
     .catch(onError);
 }
 
-// Create GCW context menu entry
-const GCW_MENU = browser.contextMenus.create({
-  id: 'gcw',
-  title: browser.i18n.getMessage('extension_name'),
-  contexts: ['selection'],
-});
-
-const GCW = {};
-// Links to Caches, TBs, Bookmarks or GeoTours
-GCW.code_for_link = false;
-GCW.open_id = 1;
-// Links to online Tools
-GCW.tools = [
-  {
-    name: 'alphabetvalues',
-    params: [{ name: 'input' }, { name: 'mode', values: ['encode', 'decode'] }],
-  },
-  {
-    name: 'base16',
-    params: [{ name: 'input' }, { name: 'mode', values: ['encode', 'decode'] }],
-  },
-  {
-    name: 'base32',
-    params: [{ name: 'input' }, { name: 'mode', values: ['encode', 'decode'] }],
-  },
-  {
-    name: 'base58',
-    params: [{ name: 'input' }, { name: 'mode', values: ['encode', 'decode'] }],
-  },
-  {
-    name: 'base64',
-    params: [{ name: 'input' }, { name: 'mode', values: ['encode', 'decode'] }],
-  },
-  {
-    name: 'base85',
-    params: [{ name: 'input' }, { name: 'mode', values: ['encode', 'decode'] }],
-  },
-  {
-    name: 'base91',
-    params: [{ name: 'input' }, { name: 'mode', values: ['encode', 'decode'] }],
-  },
-  {
-    name: 'base122',
-    params: [{ name: 'input' }, { name: 'mode', values: ['encode', 'decode'] }],
-  },
-];
-GCW.selection;
-
-const ENTRY_OPEN_GCW = browser.contextMenus.create({
-  id: 'open_gcw',
-  title: browser.i18n.getMessage('open_gcw'),
-  contexts: ['selection'],
-  parentId: GCW_MENU,
-});
-
-browser.contextMenus.onClicked.addListener((info, tab) => {
-  // ToDo: Entschlüsseln; einzelne Verschlüsslungen auflisten
-  /*if (info.menuItemId == 'encrypt') {
-    copy2clipboard(info.selectionText);
-    sendMessage(tab.id, { do: 'showPopup', msg: browser.i18n.getMessage('encryption_copied') });
-  }
-  if (info.menuItemId == 'decrypt') {
-    copy2clipboard(info.selectionText);
-    sendMessage(tab.id, { do: 'showPopup', msg: browser.i18n.getMessage('decryption_copied') });
-  }*/
-  // Open in GCW
-  if (info.menuItemId.match(/open_gcw/i)) {
-    let match = info.menuItemId.match(/open_gcw_(\w+)_(\w+)/i);
-    sendMessage(tab.id, { do: 'openGCW', tool: match[1], params: { input: GCW.selection, mode: match[2] } });
-  }
-  if (info.menuItemId.match(/open\d+/i)) {
-    // Open Cache, TB, Bookmark or GeoTour
-    sendMessage(tab.id, { do: 'openLink', href: 'https://coord.info/' + GCW.code_for_link });
-  }
-  // Remove option to open caches, TBs, Bookmarks or GeoTours
-  if (GCW.code_for_link !== false) {
-    browser.contextMenus.remove('open' + GCW.open_id);
-    GCW.open_id++;
-    GCW.code_for_link = false;
-    browser.contextMenus.refresh();
-  }
-});
-
 function handleMessage(request, sender, sendResponse) {
   GCW.selection = request.selection;
   if (request.do === 'contextmenu') {
-    for (let i = 0; i < GCW.tools.length; i++) {
-      const tool = GCW.tools[i];
-      console.log('tool', i, tool);
-      const ENTRY = browser.contextMenus.create({
-        id: tool.name,
-        title: browser.i18n.getMessage(tool.name),
+    if (request.selection.match(/(GC|TB|BM|GT)[A-Z0-9]+/i)) {
+      browser.contextMenus.create({
+        id: 'open_gcw',
+        title: browser.i18n.getMessage('open_gcw'),
         contexts: ['selection'],
-        parentId: ENTRY_OPEN_GCW,
+        parentId: GCW_MENU,
       });
-      for (let j = 0; j < tool.params[1].values.length; j++) {
-        const mode = tool.params[1].values[j];
-        browser.contextMenus.create({
-          id: `open_gcw_${tool.name}_${mode}`,
-          title: browser.i18n.getMessage(mode),
-          contexts: ['selection'],
-          parentId: tool.name,
-        });
+    }
+    const parentId = request.selection.match(/(GC|TB|BM|GT)[A-Z0-9]+/i) ? 'open_gcw' : 'gcw';
+    let subMenus = {};
+    // Create Menuentries for tools
+    for (const tool of GCW.tools) {
+      let [toolName, val] = Object.entries(tool)[0];
+      toolName = toolName.split('/')[1];
+      // Test if there is a supercategory (like base or rotation)
+      if (toolName.includes('_')) {
+        let [superCat, subCat] = toolName.split('_');
+        if (!subMenus[superCat]) {
+          // No? => Create
+          let sc = browser.contextMenus.create({
+            id: superCat,
+            title: browser.i18n.getMessage(superCat),
+            contexts: ['selection'],
+            parentId: parentId,
+          });
+          subMenus[superCat] = sc;
+        }
+      }
+      // Create Tool entry
+      let entry = browser.contextMenus.create({
+        id: `open_gcw-${toolName}`,
+        title: browser.i18n.getMessage(toolName),
+        contexts: ['selection'],
+        parentId: toolName.includes('_') ? toolName.split('_')[0] : parentId,
+      });
+      let params = val['get']['parameters'];
+      if (!params) {
+        console.error('no params', toolName);
+        continue;
+      }
+      for (const param of params) {
+        switch (param.name) {
+          case 'mode':
+          case 'lang':
+            for (const name of param.schema.enum) {
+              browser.contextMenus.create({
+                id: `open_gcw-${toolName}-${name}`,
+                title: browser.i18n.getMessage(name),
+                contexts: ['selection'],
+                parentId: entry,
+              });
+            }
+        }
       }
     }
     // Open Caches, TBs, Bookmarks and GeoTours
@@ -154,4 +107,64 @@ function handleMessage(request, sender, sendResponse) {
   return Promise.resolve({ response: 'did nothing' });
 }
 
-browser.runtime.onMessage.addListener(handleMessage);
+async function main() {
+  // Create GCW context menu entry
+  const GCW_MENU = browser.contextMenus.create({
+    id: 'gcw',
+    title: browser.i18n.getMessage('extension_name'),
+    contexts: ['selection'],
+  });
+
+  // Links to Caches, TBs, Bookmarks or GeoTours
+  GCW.code_for_link = false;
+  GCW.open_id = 1;
+  // Links to online Tools
+  const jsonFilePath = browser.runtime.getURL('data/tools.json');
+  // Funktion zum Laden der JSON-Datei
+  async function loadJSONFile(filePath) {
+    try {
+      const response = await fetch(filePath);
+      const json = await response.json();
+      console.log('JSON-Datei loaded:', json);
+      return json;
+    } catch (error) {
+      console.error('Error loading JSON file:', error);
+    }
+  }
+  GCW.tools = await loadJSONFile(jsonFilePath);
+  GCW.selection;
+
+  browser.contextMenus.onClicked.addListener((info, tab) => {
+    // Open in GCW
+    if (info.menuItemId.match(/open_gcw/i)) {
+      let options = info.menuItemId.split('-');
+      let params = { input: GCW.selection };
+      if (options[2]) {
+        let key = `/${options[1]}`;
+        let tool = GCW.tools.filter((tool) => key in tool).map((tool) => tool[key])[0];
+        console.log(tool);
+        params[tool.get.parameters.mode ? 'mode' : 'lang'] = options[2];
+      }
+      sendMessage(tab.id, { do: 'openGCW', tool: options[1], params: params });
+    }
+    if (info.menuItemId.match(/open\d+/i)) {
+      // Open Cache, TB, Bookmark or GeoTour
+      sendMessage(tab.id, { do: 'openLink', href: 'https://coord.info/' + GCW.code_for_link });
+    }
+    // Remove option to open caches, TBs, Bookmarks or GeoTours
+    if (GCW.code_for_link !== false) {
+      browser.contextMenus.remove('open' + GCW.open_id);
+      GCW.open_id++;
+      GCW.code_for_link = false;
+      browser.contextMenus.refresh();
+    }
+  });
+
+  // Messages from content script
+  browser.runtime.onMessage.addListener(handleMessage);
+}
+
+const GCW = {};
+GCW.tools = [];
+GCW.selection = '';
+main();
