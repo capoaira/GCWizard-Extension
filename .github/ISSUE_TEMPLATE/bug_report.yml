@@ -31,21 +31,9 @@ body:
     attributes:
       label: Expected behavior
       description: A clear and concise description of what you expected to happen.
-      placeholder: "Instead, the following should happen: ..."
+      placeholder: 'Instead, the following should happen: ...'
     validations:
       required: false
-  - type: dropdown
-    id: os
-    attributes:
-      label: OS
-      options:
-        - Windows
-        - MacOS
-        - Linux
-        - Other
-      multiple: true
-    validations:
-      required: true
   - type: dropdown
     id: browser
     attributes:
@@ -64,7 +52,7 @@ body:
     id: version
     attributes:
       label: Version
-      placeholder: e.g. 0.9.12
+      placeholder: e.g. 1.0.2
     validations:
       required: true
   - type: textarea
