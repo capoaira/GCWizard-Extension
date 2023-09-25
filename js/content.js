@@ -208,15 +208,25 @@ GCW.main = function () {
             // Leere Tags abfangen
             if (!html) return '';
             // Handel line Breaks
-            html = html.replace(/(?<!\n)\s*(&#60;br[ \/]{0,2}&#62;<br[ \/]{0,2}>)/g, '$1' + '&nbsp'.repeat(4));
+            html = html.replace(/(?<!\n)\s*(&#60;br[ \/]{0,2}&#62;<br[ \/]{0,2}>)\s*/g, '$1' + '&nbsp'.repeat(4 * intend));
             // Regex
             let regex = /&#60;([a-zA-Z]+)((?:"[^"]*"|'[^']*'|[^'"&#62;])*&#62;)((?:(?!\1&#62;.*?&#60;\1).)*)(&#60;\/\1&#62;)/gs;
             let result = [];
-            let match;
-            while ((match = regex.exec(html)) !== null) {
+            let match = regex.exec(html);
+            let nextMatch;
+            let lastIndex = 0;
+            let nextIndex = 0;
+            while (match) {
+              nextMatch = regex.exec(html);
+              if (nextMatch) nextIndex = nextMatch.index;
               const [fullMatch, openingTag, attributes, innerHTML, closingTag] = match;
+              const preMatchText = html.substring(lastIndex, match.index).trim();
+              lastIndex = match.index + fullMatch.length;
+              let postMatchText = nextIndex > lastIndex ? html.substring(lastIndex, nextIndex).trim() : '';
+              console.log(preMatchText, fullMatch, postMatchText);
               result.push(
-                '&#60;' +
+                preMatchText +
+                  '&#60;' +
                   openingTag +
                   attributes +
                   (fullMatch.length > 90
@@ -226,17 +236,18 @@ GCW.main = function () {
                       '<br />' +
                       '&nbsp'.repeat(4 * intend) +
                       closingTag
-                    : innerHTML + closingTag)
+                    : innerHTML + closingTag) +
+                  postMatchText
               );
+              match = nextMatch;
             }
-            console.log('intend', intend);
-            console.log('länge', result.length);
             return result.length == 0 ? html : result.join('<br />' + '&nbsp'.repeat(4 * intend));
           }
 
           // Handel line breaks
           description = description.replace(/(&#60;br[ \/]{0,2}&#62;)/g, '$1<br>');
-          description = formatHTML(description);
+          // Format
+          description = formatHTML(description.trim());
         }
         if (GCW.getVal('analyze_html_syntax')) {
           // Highlight tags
