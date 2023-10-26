@@ -207,8 +207,6 @@ GCW.main = function () {
           function formatHTML(html, intend = 0) {
             // Leere Tags abfangen
             if (!html) return '';
-            // Handel line Breaks
-            html = html.replace(/(?<!\n)\s*(&#60;br[ \/]{0,2}&#62;<br[ \/]{0,2}>)\s*/g, '$1' + '&nbsp'.repeat(4 * intend));
             // Regex
             let regex = /&#60;([a-zA-Z]+)((?:"[^"]*"|'[^']*'|[^'"&#62;])*&#62;)((?:(?!\1&#62;.*?&#60;\1).)*)(&#60;\/\1&#62;)/gs;
             let result = [];
@@ -216,42 +214,38 @@ GCW.main = function () {
             let nextMatch;
             let lastIndex = 0;
             let nextIndex = 0;
+            let postMatchText;
             while (match) {
               nextMatch = regex.exec(html);
               if (nextMatch) nextIndex = nextMatch.index;
               const [fullMatch, openingTag, attributes, innerHTML, closingTag] = match;
               const preMatchText = html.substring(lastIndex, match.index).trim();
               lastIndex = match.index + fullMatch.length;
-              let postMatchText = nextIndex > lastIndex ? html.substring(lastIndex, nextIndex).trim() : '';
-              console.log(preMatchText, fullMatch, postMatchText);
+              postMatchText = nextIndex > lastIndex ? html.substring(lastIndex, nextIndex).trim() : '';
               result.push(
                 preMatchText +
                   '&#60;' +
                   openingTag +
                   attributes +
                   (fullMatch.length > 90
-                    ? '<br />' +
-                      '&nbsp'.repeat(4 * (intend + 1)) +
-                      formatHTML(innerHTML, intend + 1) +
-                      '<br />' +
-                      '&nbsp'.repeat(4 * intend) +
-                      closingTag
-                    : innerHTML + closingTag) +
-                  postMatchText
+                    ? '<div class="gcw_html_block" style="margin-left:1.5em;">' + formatHTML(innerHTML, intend + 1) + '</div>'
+                    : innerHTML) +
+                  closingTag
               );
               match = nextMatch;
             }
-            return result.length == 0 ? html : result.join('<br />' + '&nbsp'.repeat(4 * intend));
+            return result.length == 0 ? html : result.join('') + postMatchText;
           }
 
-          // Handel line breaks
-          description = description.replace(/(&#60;br[ \/]{0,2}&#62;)/g, '$1<br>');
+          // Handel line breaks and commts
+          description = description.replace(/(&#60;(?:br[ \/]{0,2}|!--.*?--)&#62;)/g, '$1<br>');
           // Format
+          console.log(description);
           description = formatHTML(description.trim());
         }
         if (GCW.getVal('analyze_html_syntax')) {
           // Highlight tags
-          description = description.replace(/&#60;("[^"]*"|'[^']*'|[^'"&#62;])*&#62;/gm, function (match) {
+          description = description.replace(/&#60;(?:\w+|\/)("[^"]*"|'[^']*'|[^'"&#62;])*&#62;/gm, function (match) {
             match = match.replace(
               /(\w+)(=)(".*?")/gm,
               '<span class="gcw_html_key">$1</span><span class="gcw_html_equal_sign">$2</span><span class="gcw_html_value">$3</span>'
