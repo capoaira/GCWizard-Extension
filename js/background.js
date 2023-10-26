@@ -1,9 +1,17 @@
 'use strict';
 
+/**
+ * Outputs an error message to the Web console
+ * @param {string} msg
+ */
 function onError(msg) {
   console.error('GCW Error: ' + msg);
 }
 
+/**
+ * Copy text to clipboard
+ * @param {string} text
+ */
 function copy2clipboard(text) {
   function oncopy(e) {
     document.removeEventListener('copy', oncopy, true);
@@ -18,6 +26,11 @@ function copy2clipboard(text) {
   document.execCommand('copy');
 }
 
+/**
+ * Sends a massage to to
+ * @param {?} tabId
+ * @param {string} msg
+ */
 function sendMessage(tabId, msg) {
   browser.tabs
     .sendMessage(tabId, msg)
@@ -27,18 +40,27 @@ function sendMessage(tabId, msg) {
     .catch(onError);
 }
 
-function handleMessage(request, sender, sendResponse) {
+/**
+ * Handels Messages from the content script
+ *
+ * @param {?} request
+ * @param {?} _sender
+ * @param {?} _sendResponse
+ * @returns The completed action
+ */
+function handleMessage(request, _sender, _sendResponse) {
   GCW.selection = request.selection;
   if (request.do === 'contextmenu') {
     if (request.selection.match(/(GC|TB|BM|GT)[A-Z0-9]+/i)) {
       browser.contextMenus.create({
-        id: 'open_gcw',
+        id: 'open_with_gcw',
         title: browser.i18n.getMessage('open_gcw'),
         contexts: ['selection'],
-        parentId: GCW_MENU,
+        parentId: 'gcw',
       });
+      browser.contextMenus.refresh();
     }
-    const parentId = request.selection.match(/(GC|TB|BM|GT)[A-Z0-9]+/i) ? 'open_gcw' : 'gcw';
+    const parentId = request.selection.match(/(GC|TB|BM|GT)[A-Z0-9]+/i) ? 'open_with_gcw' : 'gcw';
     let subMenus = {};
     // Create Menuentries for tools
     for (const tool of GCW.tools) {
@@ -46,7 +68,7 @@ function handleMessage(request, sender, sendResponse) {
       toolName = toolName.split('/')[1];
       // Test if there is a supercategory (like base or rotation)
       if (toolName.includes('_')) {
-        let [superCat, subCat] = toolName.split('_');
+        let superCat = toolName.split('_')[0];
         if (!subMenus[superCat]) {
           // No? => Create
           let sc = browser.contextMenus.create({
@@ -55,6 +77,7 @@ function handleMessage(request, sender, sendResponse) {
             contexts: ['selection'],
             parentId: parentId,
           });
+          browser.contextMenus.refresh();
           subMenus[superCat] = sc;
         }
       }
@@ -65,6 +88,7 @@ function handleMessage(request, sender, sendResponse) {
         contexts: ['selection'],
         parentId: toolName.includes('_') ? toolName.split('_')[0] : parentId,
       });
+      browser.contextMenus.refresh();
       let params = val['get']['parameters'];
       if (!params) {
         console.error('no params', toolName);
@@ -81,6 +105,7 @@ function handleMessage(request, sender, sendResponse) {
                 contexts: ['selection'],
                 parentId: entry,
               });
+              browser.contextMenus.refresh();
             }
         }
       }
@@ -96,24 +121,32 @@ function handleMessage(request, sender, sendResponse) {
         id: 'open' + GCW.open_id,
         title: browser.i18n.getMessage('open_' + type),
         contexts: ['selection'],
-        parentId: GCW_MENU,
+        parentId: 'gcw',
       });
       browser.contextMenus.refresh();
-      return Promise.resolve({ response: 'add open ' + GCW.code_for_link });
+    } else {
+      // Remove option to open caches, TBs, Bookmarks or GeoTours (If it was added)
+      if (GCW.code_for_link !== false) {
+        browser.contextMenus.remove('open' + GCW.open_id);
+        browser.contextMenus.remove('open_with_gcw');
+        GCW.open_id++;
+        GCW.code_for_link = false;
+        browser.contextMenus.refresh();
+      }
     }
-    browser.contextMenus.refresh();
-    return Promise.resolve({ response: 'add tool' });
   }
+  browser.contextMenus.refresh();
   return Promise.resolve({ response: 'did nothing' });
 }
 
 async function main() {
   // Create GCW context menu entry
-  const GCW_MENU = browser.contextMenus.create({
+  browser.contextMenus.create({
     id: 'gcw',
     title: browser.i18n.getMessage('extension_name'),
     contexts: ['selection'],
   });
+  browser.contextMenus.refresh();
 
   // Links to Caches, TBs, Bookmarks or GeoTours
   GCW.code_for_link = false;
@@ -151,9 +184,10 @@ async function main() {
       // Open Cache, TB, Bookmark or GeoTour
       sendMessage(tab.id, { do: 'openLink', href: 'https://coord.info/' + GCW.code_for_link });
     }
-    // Remove option to open caches, TBs, Bookmarks or GeoTours
+    // Remove option to open caches, TBs, Bookmarks or GeoTours (If it was added)
     if (GCW.code_for_link !== false) {
       browser.contextMenus.remove('open' + GCW.open_id);
+      browser.contextMenus.remove('open_with_gcw');
       GCW.open_id++;
       GCW.code_for_link = false;
       browser.contextMenus.refresh();
