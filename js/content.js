@@ -22,7 +22,7 @@ function getMessage(data) {
   return Promise.resolve({ response: 'did nothing' });
 }
 
-window.addEventListener('contextmenu', function (e) {
+window.addEventListener('contextmenu', function (_e) {
   function handleResponse(message) {
     console.log('GCW response: ' + message.response);
   }
@@ -30,7 +30,10 @@ window.addEventListener('contextmenu', function (e) {
     console.error('GCW Error: ' + error);
   }
   let selection = window.getSelection().toString();
-  let sending = browser.runtime.sendMessage({ do: 'contextmenu', selection: selection });
+  let sending = browser.runtime.sendMessage({
+    do: 'contextmenu',
+    selection: selection,
+  });
   sending.then(handleResponse, handleError);
 });
 
@@ -138,11 +141,17 @@ GCW.buildToggle = function (id, label, info = '') {
 // Main functions on the cache detail page
 GCW.main = function () {
   // Run only on cache detail page
-  if (!document.location.href.match(/\.com\/(seek\/cache_details\.aspx|geocache\/)/)) return;
+  if (
+    !document.location.href.match(
+      /\.com\/(seek\/cache_details\.aspx|geocache\/)/
+    )
+  )
+    return;
 
   // Add the Popup
   function addPopup() {
-    let html = '<div id="gcw_popup"><span id="gcw_popup_msg">GCW_Popup</span></div>';
+    let html =
+      '<div id="gcw_popup"><span id="gcw_popup_msg">GCW_Popup</span></div>';
     $('body').append(html);
   }
   addPopup();
@@ -168,15 +177,24 @@ GCW.main = function () {
   function addAnalyzePage() {
     // Helper functions for analyze Cache Description
     function toggelHtml() {
-      GCW.setVal('analyze_html_source', $('#analyze_html_source').is(':checked'));
+      GCW.setVal(
+        'analyze_html_source',
+        $('#analyze_html_source').is(':checked')
+      );
       changehtml(GCW.getVal('analyze_html_source'));
     }
     function toggelHtmlFormat() {
-      GCW.setVal('analyze_html_format', $('#analyze_html_format').is(':checked'));
+      GCW.setVal(
+        'analyze_html_format',
+        $('#analyze_html_format').is(':checked')
+      );
       changehtml(GCW.getVal('analyze_html_source'));
     }
     function toggelHtmlColors() {
-      GCW.setVal('analyze_html_syntax', $('#analyze_html_syntax').is(':checked'));
+      GCW.setVal(
+        'analyze_html_syntax',
+        $('#analyze_html_syntax').is(':checked')
+      );
       changehtml(GCW.getVal('analyze_html_source'));
     }
     function changehtml(isSource) {
@@ -202,19 +220,26 @@ GCW.main = function () {
             GCW.i18n('analyze_long_description') +
             '</h3>';
         }
-        let description = $('#ctl00_ContentBody_LongDescription').html().toHtmlEntities();
+        let description = $('#ctl00_ContentBody_LongDescription')
+          .html()
+          .toHtmlEntities();
         if (GCW.getVal('analyze_html_format')) {
           function formatHTML(html, intend = 0) {
             // Leere Tags abfangen
             if (!html) return '';
             // Handel line Breaks
-            html = html.replace(/(?<!\n)\s*(&#60;br[ \/]{0,2}&#62;<br[ \/]{0,2}>)/g, '$1' + '&nbsp'.repeat(4));
+            html = html.replace(
+              /(?<!\n)\s*(&#60;br[ \/]{0,2}&#62;<br[ \/]{0,2}>)/g,
+              '$1' + '&nbsp'.repeat(4)
+            );
             // Regex
-            let regex = /&#60;([a-zA-Z]+)((?:"[^"]*"|'[^']*'|[^'"&#62;])*&#62;)((?:(?!\1&#62;.*?&#60;\1).)*)(&#60;\/\1&#62;)/gs;
+            let regex =
+              /&#60;([a-zA-Z]+)((?:"[^"]*"|'[^']*'|[^'"&#62;])*&#62;)((?:(?!\1&#62;.*?&#60;\1).)*)(&#60;\/\1&#62;)/gs;
             let result = [];
             let match;
             while ((match = regex.exec(html)) !== null) {
-              const [fullMatch, openingTag, attributes, innerHTML, closingTag] = match;
+              const [fullMatch, openingTag, attributes, innerHTML, closingTag] =
+                match;
               result.push(
                 '&#60;' +
                   openingTag +
@@ -231,26 +256,40 @@ GCW.main = function () {
             }
             console.log('intend', intend);
             console.log('länge', result.length);
-            return result.length == 0 ? html : result.join('<br />' + '&nbsp'.repeat(4 * intend));
+            return result.length == 0
+              ? html
+              : result.join('<br />' + '&nbsp'.repeat(4 * intend));
           }
 
           // Handel line breaks
-          description = description.replace(/(&#60;br[ \/]{0,2}&#62;)/g, '$1<br>');
+          description = description.replace(
+            /(&#60;br[ \/]{0,2}&#62;)/g,
+            '$1<br>'
+          );
           description = formatHTML(description);
         }
         if (GCW.getVal('analyze_html_syntax')) {
           // Highlight tags
-          description = description.replace(/&#60;("[^"]*"|'[^']*'|[^'"&#62;])*&#62;/gm, function (match) {
-            match = match.replace(
-              /(\w+)(=)(".*?")/gm,
-              '<span class="gcw_html_key">$1</span><span class="gcw_html_equal_sign">$2</span><span class="gcw_html_value">$3</span>'
-            );
-            return '<span class="gcw_html_tag">' + match + '</span>';
-          });
+          description = description.replace(
+            /&#60;("[^"]*"|'[^']*'|[^'"&#62;])*&#62;/gm,
+            function (match) {
+              match = match.replace(
+                /(\w+)(=)(".*?")/gm,
+                '<span class="gcw_html_key">$1</span><span class="gcw_html_equal_sign">$2</span><span class="gcw_html_value">$3</span>'
+              );
+              return '<span class="gcw_html_tag">' + match + '</span>';
+            }
+          );
           // Highlight comments
-          description = description.replace(/(&#60;!--.*?--&#62;)/gm, '<span class="gcw_html_comment">$&</span>');
+          description = description.replace(
+            /(&#60;!--.*?--&#62;)/gm,
+            '<span class="gcw_html_comment">$&</span>'
+          );
           // Highlight '&...;'
-          description = description.replace(/&#38;\w+;/gm, '<span class="gcw_html_unicode">$&</span>');
+          description = description.replace(
+            /&#38;\w+;/gm,
+            '<span class="gcw_html_unicode">$&</span>'
+          );
         }
         html += '<span>' + description + '</span>';
         $('#gcw_analyze_listing_content').html(html);
@@ -273,19 +312,29 @@ GCW.main = function () {
     }
 
     function toggelComments() {
-      GCW.setVal('analyze_show_comments', $('#analyze_show_comments').is(':checked'));
+      GCW.setVal(
+        'analyze_show_comments',
+        $('#analyze_show_comments').is(':checked')
+      );
       changeComments(GCW.getVal('analyze_show_comments'));
     }
     function changeComments(isOn) {
       if (isOn && !GCW.getVal('analyze_html_source')) {
         // Note dependency
         let html = $('#gcw_analyze_listing_content').html();
-        html = html.replace(/<(!--.*--)>/gm, '$&<span class="gcw_html_comment">&lt;$1&gt;</span>');
+        html = html.replace(
+          /<(!--.*--)>/gm,
+          '$&<span class="gcw_html_comment">&lt;$1&gt;</span>'
+        );
         $('#gcw_analyze_listing_content').html(html);
         if (!html.match(/<!--.*-->/gm)) {
           $('#analyze_show_comments')
             .parents('.gcw_toggle label')
-            .after('<span class="gcw_toggel_warn">' + GCW.i18n('analyze_no_comments') + '</span>');
+            .after(
+              '<span class="gcw_toggel_warn">' +
+                GCW.i18n('analyze_no_comments') +
+                '</span>'
+            );
         }
       } else {
         let html = '';
@@ -336,10 +385,22 @@ GCW.main = function () {
       '    <h1>' +
       GCW.i18n('analyze_description') +
       '</h1>' +
-      GCW.buildToggle('analyze_html_source', GCW.i18n('analyze_show_html_source')) +
-      GCW.buildToggle('analyze_show_comments', GCW.i18n('analyze_show_comments')) +
-      GCW.buildToggle('analyze_html_syntax', GCW.i18n('analyze_show_html_syntax')) +
-      GCW.buildToggle('analyze_html_format', GCW.i18n('analyze_show_html_format')) +
+      GCW.buildToggle(
+        'analyze_html_source',
+        GCW.i18n('analyze_show_html_source')
+      ) +
+      GCW.buildToggle(
+        'analyze_show_comments',
+        GCW.i18n('analyze_show_comments')
+      ) +
+      GCW.buildToggle(
+        'analyze_html_syntax',
+        GCW.i18n('analyze_show_html_syntax')
+      ) +
+      GCW.buildToggle(
+        'analyze_html_format',
+        GCW.i18n('analyze_show_html_format')
+      ) +
       '        <h3>' +
       GCW.i18n('analyze_description') +
       '</h3>' +
@@ -365,7 +426,10 @@ GCW.main = function () {
     $('#analyze_html_syntax').bind('click', toggelHtmlColors);
     $('#analyze_html_format').bind('click', toggelHtmlFormat);
     // Set width of listing
-    $('#gcw_analyze_listing').css('width', $('.UserSuppliedContent')[0].offsetWidth);
+    $('#gcw_analyze_listing').css(
+      'width',
+      $('.UserSuppliedContent')[0].offsetWidth
+    );
   }
   addAnalyzePage();
 
