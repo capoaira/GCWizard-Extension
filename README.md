@@ -30,5 +30,6 @@ Then you have 2 options:
     <li>
         <b>Help with development:</b><br>
         The extension is written in JavaScript. You can create a fork from this repository and make the changes. Then you can create a pull request and we will take your change over.
+        See: <a href="https://github.com/capoaira/GCWizard-Extension/wiki/How-to-contribute" title="How to contribute">How to contribute</a>
     </li>
 </ol>
