@@ -10,6 +10,6 @@
   "license": "GPL-3.0",
   "dependencies": {
     "jquery": "^3.7.1",
-    "webextension-polyfill": "^0.10.0"
+    "webextension-polyfill": "^0.12.0"
   }
 }
