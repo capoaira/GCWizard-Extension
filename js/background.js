@@ -12,6 +12,7 @@ function onError(msg) {
  * Copy text to clipboard
  * @param {string} text
  */
+// eslint-disable-next-line no-unused-vars
 function copy2clipboard(text) {
   function oncopy(e) {
     document.removeEventListener('copy', oncopy, true);

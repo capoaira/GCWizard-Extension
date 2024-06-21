@@ -22,7 +22,7 @@ function getMessage(data) {
   return Promise.resolve({ response: 'did nothing' });
 }
 
-window.addEventListener('contextmenu', function (e) {
+window.addEventListener('contextmenu', function (_e) {
   function handleResponse(message) {
     console.log('GCW response: ' + message.response);
   }
