@@ -4,12 +4,18 @@
   "description": "An extension to get access to the tools of the GCWizard and solve mysterys on geocaching.com",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --max-warnings 0 . || (echo 'Linter failed' && exit 1)",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write js/",
+    "format:check": "prettier --check js/ || (echo 'Code is not formatted' && exit 1)"
   },
   "author": "GCWizard",
   "license": "GPL-3.0",
   "dependencies": {
+    "eslint": "^9.5.0",
     "jquery": "^3.7.1",
+    "prettier": "^3.3.2",
     "webextension-polyfill": "^0.12.0"
   }
 }

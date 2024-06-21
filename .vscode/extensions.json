@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "antfu.vite",
+    "vue.volar",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}
