@@ -60,7 +60,9 @@ function handleMessage(request, _sender, _sendResponse) {
       });
       browser.contextMenus.refresh();
     }
-    const parentId = request.selection.match(/(GC|TB|BM|GT)[A-Z0-9]+/i) ? 'open_with_gcw' : 'gcw';
+    const parentId = request.selection.match(/(GC|TB|BM|GT)[A-Z0-9]+/i)
+      ? 'open_with_gcw'
+      : 'gcw';
     let subMenus = {};
     // Create Menuentries for tools
     for (const tool of GCW.tools) {
@@ -116,7 +118,9 @@ function handleMessage(request, _sender, _sendResponse) {
       if (request.selection.match(/TB[A-Z0-9]+/i)) type = 'tb';
       if (request.selection.match(/BM[A-Z0-9]+/i)) type = 'bm';
       if (request.selection.match(/GT[A-Z0-9]+/i)) type = 'gt';
-      GCW.code_for_link = request.selection.match(/(GC|TB|BM|GT)[A-Z0-9]+\b/i)[0];
+      GCW.code_for_link = request.selection.match(
+        /(GC|TB|BM|GT)[A-Z0-9]+\b/i
+      )[0];
       browser.contextMenus.create({
         id: 'open' + GCW.open_id,
         title: browser.i18n.getMessage('open_' + type),
@@ -174,7 +178,9 @@ async function main() {
       let params = { input: GCW.selection };
       if (options[2]) {
         let key = `/${options[1]}`;
-        let tool = GCW.tools.filter((tool) => key in tool).map((tool) => tool[key])[0];
+        let tool = GCW.tools
+          .filter((tool) => key in tool)
+          .map((tool) => tool[key])[0];
         console.log(tool);
         params[tool.get.parameters.mode ? 'mode' : 'lang'] = options[2];
       }
@@ -182,7 +188,10 @@ async function main() {
     }
     if (info.menuItemId.match(/open\d+/i)) {
       // Open Cache, TB, Bookmark or GeoTour
-      sendMessage(tab.id, { do: 'openLink', href: 'https://coord.info/' + GCW.code_for_link });
+      sendMessage(tab.id, {
+        do: 'openLink',
+        href: 'https://coord.info/' + GCW.code_for_link,
+      });
     }
     // Remove option to open caches, TBs, Bookmarks or GeoTours (If it was added)
     if (GCW.code_for_link !== false) {
