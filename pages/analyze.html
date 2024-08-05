@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>GC Wizard</title>
+    <link rel="icon" href="/icons/logo-32.png">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/js/helpers.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="analyze.css">
+  </head>
+
+  <body>
+    <div id="gcw_analyze">
+      <h1 i18n="analyze_owner"></h1>
+      <div id="gcw_analyze_owner">
+        <span i18n="analyze_owner" append=":"></span>
+        <span fill="owner"></span>
+        <span i18n="analyze_pseudonym" append=":"></span>
+        <span fill="pseudonym"></span>
+      </div>
+      <h1 i18n="analyze_description"></h1>
+      <div class="gcw_toggle" i18n="analyze_show_html_source" key="analyze_html_source" checked></div>
+      <div class="gcw_toggle" i18n="analyze_show_comments" key="analyze_show_comments" checked></div>
+      <div class="gcw_toggle" i18n="analyze_show_html_syntax" key="analyze_html_syntax"></div>
+      <div class="gcw_toggle" i18n="analyze_show_html_format" key="analyze_html_structure"></div>
+      <div id="gcw_analyze_listing">
+        <div id="gcw_analyze_listing_content"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:1em;">
+        <h1 i18n="analyze_hint"></h1>
+        <span i18n="analyze_hint_without_colors"></span>
+      </div>
+      <div id="gcw_analyze_hint">
+        <span fill="hint"></span>
+      </div>
+    </div>
+    <script src="analyze.js"></script>
+  </body>
+
+</html>
