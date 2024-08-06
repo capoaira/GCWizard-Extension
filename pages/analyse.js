@@ -9,10 +9,11 @@ $(document).ready(async () => {
       '$1' + '&nbsp;'.repeat(4)
     );
     const regex =
-      /&#60;(?:([a-zA-Z]+)((?:"[^"]*"|'[^']*'|[^'"&#62;])*&#62;)|!--)((?:(?!\1&#62;.*?&#60;\1).)*)(&#60;\/\1&#62;|--&#62;)/gs;
+      /(?:&#60;(?:([a-zA-Z]+)((?:"[^"]*"|'[^']*'|[^'"&#62;])*&#62;)|!--)((?:(?!\1&#62;.*?&#60;\1).)*)(&#60;\/\1&#62;|--&#62;)|.+?(?=&#60;))/gs;
     let result = [];
     let match;
     while ((match = regex.exec(html)) !== null) {
+      console.log(match);
       const [fullMatch, openingTag, attributes, innerHTML, closingTag] = match;
       if (openingTag)
         result.push(
