@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>GC Wizard</title>
+    <link rel="icon" href="/icons/logo-32.png">
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/js/helpers.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="analyse.css">
+  </head>
+
+  <body>
+    <div id="gcw_analyse">
+      <div class="inline">
+        <h1 fill="name"></h1<h1 fill="name"></h1>
+        <h1>-</h1>
+        <h1 fill="gccode"></h1>
+      </div>
+      <h2 i18n="analyse_owner"></h2>
+      <div id="gcw_analyse_owner">
+        <span i18n="analyse_owner" append=":"></span>
+        <span fill="owner"></span>
+        <span i18n="analyse_pseudonym" append=":"></span>
+        <span fill="pseudonym"></span>
+      </div>
+      <h2 i18n="analyse_description"></h2>
+      <div class="gcw_toggle" i18n="analyse_show_html_source" key="analyse_html_source" checked></div>
+      <div class="gcw_toggle" i18n="analyse_show_comments" key="analyse_show_comments" checked></div>
+      <div class="gcw_toggle" i18n="analyse_show_html_syntax" key="analyse_html_syntax" checked></div>
+      <div class="gcw_toggle" i18n="analyse_show_html_format" key="analyse_html_structure" checked></div>
+      <div id="gcw_analyse_listing">
+        <div id="gcw_analyse_listing_content"></div>
+      </div>
+      <div class="inline">
+        <h2 i18n="analyse_hint"></h2>
+        <span i18n="analyse_hint_without_colors"></span>
+      </div>
+      <div id="gcw_analyse_hint">
+        <span fill="hint"></span>
+      </div>
+    </div>
+    <script src="analyse.js"></script>
+  </body>
+
+</html>

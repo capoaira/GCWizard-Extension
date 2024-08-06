@@ -18,6 +18,7 @@
         "contextMenus",
         "clipboardWrite",
         "storage",
+        "tabs",
         "<all_urls>"
     ],
 
@@ -34,6 +35,7 @@
             "js": [
                 "node_modules/webextension-polyfill/dist/browser-polyfill.min.js",
                 "node_modules/jquery/dist/jquery.min.js",
+                "js/helpers.js",
                 "js/content.js"
             ],
             "css": ["css/style.css"],
