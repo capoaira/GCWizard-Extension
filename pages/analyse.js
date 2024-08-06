@@ -9,7 +9,7 @@ $(document).ready(async () => {
       '$1' + '&nbsp;'.repeat(4)
     );
     const regex =
-      /(?:&#60;(?:([a-zA-Z]+)((?:"[^"]*"|'[^']*'|[^'"&#62;])*&#62;)|!--)((?:(?!\1&#62;.*?&#60;\1).)*)(&#60;\/\1&#62;|--&#62;)|.+?(?=&#60;))/gs;
+      /(?:&#60;(?:([a-zA-Z]+)((?:"[^"]*"|'[^']*'|[^'"&#62;])*&#62;)|!--)((?:(?!\1&#62;.*?&#60;\1).)*)(&#60;\/\1&#62;|--&#62;)|.+?(?=&#60;|$))/gs;
     let result = [];
     let match;
     while ((match = regex.exec(html)) !== null) {
@@ -20,7 +20,7 @@ $(document).ready(async () => {
           '&#60;' +
             openingTag +
             attributes +
-            (fullMatch.length > 90
+            (fullMatch.length > 80
               ? '<br />' +
                 '&nbsp;'.repeat(4 * (indent + 1)) +
                 formatHTML(innerHTML, indent + 1) +
@@ -29,7 +29,12 @@ $(document).ready(async () => {
                 closingTag
               : innerHTML + closingTag)
         );
-      else result.push(fullMatch);
+      else
+        result.push(
+          fullMatch.length > 80
+            ? `<br />${'&nbsp;'.repeat(4 * indent + 1)}${fullMatch}`
+            : fullMatch
+        );
     }
     return result.length === 0
       ? html
@@ -49,10 +54,10 @@ $(document).ready(async () => {
       let description = data.longDescription.toHtmlEntities();
 
       if (await GCW.getVal('analyse_html_structure')) {
-        description = description.replace(
+        /*description = description.replace(
           /(&#60;br[ \/]{0,2}&#62;)/g,
           '$1<br>'
-        );
+        );*/
         description = formatHTML(description);
       }
 
