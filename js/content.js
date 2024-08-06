@@ -72,8 +72,8 @@ const main = () => {
     const html = `<div class="CacheDetailNavigationWidget TopSpacing BottomSpacing">
       <h3 class="WidgetHeader">${GCW.i18n('extension_name')}</h3>
       <div class="WidgetBody">
-        <a id="openAnalyze" href="javascript:void(0)">
-          ${GCW.i18n('analyze')}
+        <a id="openAnalyse" href="javascript:void(0)">
+          ${GCW.i18n('analyse')}
         </a>
       </div>
     </div>`;
@@ -81,7 +81,7 @@ const main = () => {
   };
   addSidebar();
 
-  $('#openAnalyze').click(() => {
+  $('#openAnalyse').click(() => {
     // Ensure data is fetched and sent correctly
     let hint = '';
     if ($('#ctl00_ContentBody_lnkDH')[0].title == 'Decrypt') {
@@ -109,7 +109,7 @@ const main = () => {
     // Sending message to open the new tab
     browser.runtime.sendMessage({
       do: 'openTab',
-      url: browser.runtime.getURL('pages/analyze.html'),
+      url: browser.runtime.getURL('pages/analyse.html'),
       payload: data,
     });
   });

@@ -5,32 +5,32 @@ body {
   color: var(--text-color);
 }
 
-#gcw_analyze {
+#gcw_analyse {
   margin: 0 auto;
   width: max(80vh, 800px);
   font-family: Arial, sans-serif;
 }
 
-#gcw_analyze h1 {
+#gcw_analyse h1 {
   margin: 0.5em 0;
 }
 
-#gcw_analyze a {
+#gcw_analyse a {
   color: var(--highlight-color)
 }
 
-#gcw_analyze_owner {
+#gcw_analyse_owner {
   display: grid;
   grid-template-columns: min-content 1fr;
   column-gap: 1em;
 }
 
-#gcw_analyze_listing {
+#gcw_analyse_listing {
   border: 2px solid var(--highlight-color);
   padding: .5em;
 }
 
-#gcw_analyze_listing legend {
+#gcw_analyse_listing legend {
   padding: 0 0.5em;
 }
 

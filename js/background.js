@@ -159,9 +159,9 @@ const handleMessage = (request, _sender, _sendResponse) => {
 
     return Promise.resolve({ response: 'context menu' });
   } else if (request.do === 'openTab') {
-    browser.storage.local.set({ analyzeData: request.payload });
+    browser.storage.local.set({ analyseData: request.payload });
     browser.tabs.create({ url: request.url });
-    return Promise.resolve({ response: 'open analyze' });
+    return Promise.resolve({ response: 'open analyse' });
   }
   return Promise.resolve({ response: 'did nothing' });
 };

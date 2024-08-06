@@ -37,17 +37,17 @@ $(document).ready(async () => {
 
   // Function to handle HTML formatting and syntax highlighting
   const updateHtml = async () => {
-    const isSource = await GCW.getVal('analyze_html_source');
+    const isSource = await GCW.getVal('analyse_html_source');
     let html = '';
     if (isSource) {
       if (data.shortDescription.trim() !== '') {
-        html += `<h3>${GCW.i18n('analyze_short_description')}</h3>
+        html += `<h3>${GCW.i18n('analyse_short_description')}</h3>
           <span>${data.shortDescription}</span>
-          <h3>${GCW.i18n('analyze_long_description')}</h3>`;
+          <h3>${GCW.i18n('analyse_long_description')}</h3>`;
       }
       let description = data.longDescription.toHtmlEntities();
 
-      if (await GCW.getVal('analyze_html_structure')) {
+      if (await GCW.getVal('analyse_html_structure')) {
         description = description.replace(
           /(&#60;br[ \/]{0,2}&#62;)/g,
           '$1<br>'
@@ -55,7 +55,7 @@ $(document).ready(async () => {
         description = formatHTML(description);
       }
 
-      if (await GCW.getVal('analyze_html_syntax')) {
+      if (await GCW.getVal('analyse_html_syntax')) {
         // Highlight tags
         description = description.replace(
           /&#60;("[^"]*"|'[^']*'|[^'"&#62;])*&#62;/gm,
@@ -80,43 +80,43 @@ $(document).ready(async () => {
       }
 
       html += `<span>${description}</span>`;
-      $('#gcw_analyze_listing_content').html(html);
+      $('#gcw_analyse_listing_content').html(html);
     } else {
-      if (await GCW.getVal('analyze_show_comments')) {
+      if (await GCW.getVal('analyse_show_comments')) {
         let html = data.longDescription;
         html = html.replace(
           /<(!--.*--)>/gm,
           '$&<span class="gcw_html_comment">&lt;$1&gt;</span>'
         );
-        $('#gcw_analyze_listing_content').html(html);
+        $('#gcw_analyse_listing_content').html(html);
         if (!html.match(/<!--.*-->/gm)) {
-          $('#analyze_show_comments')
+          $('#analyse_show_comments')
             .parents('.gcw_toggle label')
             .after(
-              `<span class="gcw_toggel_warn">${GCW.i18n('analyze_no_comments')}</span>`
+              `<span class="gcw_toggel_warn">${GCW.i18n('analyse_no_comments')}</span>`
             );
         }
       } else {
         let html = '';
         if (data.shortDescription !== '') {
-          html += '<h3>' + GCW.i18n('analyze_short_description') + '</h3>';
+          html += '<h3>' + GCW.i18n('analyse_short_description') + '</h3>';
           html += data.shortDescription;
-          html += '<h3>' + GCW.i18n('analyze_long_description') + '</h3>';
+          html += '<h3>' + GCW.i18n('analyse_long_description') + '</h3>';
         }
         html += data.longDescription;
-        $('#gcw_analyze_listing_content').html(html);
+        $('#gcw_analyse_listing_content').html(html);
         if ($('.gcw_toggel_warn')[0]) $('.gcw_toggel_warn').remove();
       }
     }
 
-    if (!(await GCW.getVal('analyze_html_source'))) {
-      $('#analyze_show_comments').parent().show();
-      $('#analyze_html_syntax').parent().hide();
-      $('#analyze_html_structure').parent().hide();
+    if (!(await GCW.getVal('analyse_html_source'))) {
+      $('#analyse_show_comments').parent().show();
+      $('#analyse_html_syntax').parent().hide();
+      $('#analyse_html_structure').parent().hide();
     } else {
-      $('#analyze_show_comments').parent().hide();
-      $('#analyze_html_syntax').parent().show();
-      $('#analyze_html_structure').parent().show();
+      $('#analyse_show_comments').parent().hide();
+      $('#analyse_html_syntax').parent().show();
+      $('#analyse_html_structure').parent().show();
     }
   };
 
@@ -160,7 +160,7 @@ $(document).ready(async () => {
   };
 
   // Fetch the data from storage and call the updatePage function
-  const data = await GCW.getVal('analyzeData');
+  const data = await GCW.getVal('analyseData');
   if (data) {
     await fillTemplate();
   }
