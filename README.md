@@ -18,7 +18,7 @@ Extends your context menu with functions of the GCWizard.
 <ul>
     <li>Show owner and owner pseudonym</li>
     <li>Analyse the listing source code</li>
-    <li>Analyse the hint and Waypoints</li>
+    <li>Analyse the hint</li>
 </ul>
 
 ## You are missing a function?
