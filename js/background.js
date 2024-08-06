@@ -64,6 +64,7 @@ const handleMessage = (request, _sender, _sendResponse) => {
     const parentId = request.selection.match(/(GC|TB|BM|GT)[A-Z0-9]+/i)
       ? 'open_with_gcw'
       : 'gcw';
+    console.log(parentId);
     let subMenus = {};
     // Create Menuentries for tools
     for (const tool of GCW.tools) {
@@ -139,15 +140,17 @@ const handleMessage = (request, _sender, _sendResponse) => {
         browser.contextMenus.refresh();
       }
     }
+    return Promise.resolve({ response: 'context menu' });
   } else if (request.do === 'openTab') {
     browser.storage.local.set({ analyzeData: request.payload });
     browser.tabs.create({ url: request.url });
+    return Promise.resolve({ response: 'open analyze' });
   }
   browser.contextMenus.refresh();
   return Promise.resolve({ response: 'did nothing' });
 };
 
-async function main() {
+const main = async () => {
   // Create GCW context menu entry
   browser.contextMenus.create({
     id: 'gcw',
@@ -162,7 +165,7 @@ async function main() {
   // Links to online Tools
   const jsonFilePath = browser.runtime.getURL('data/tools.json');
   // Funktion zum Laden der JSON-Datei
-  async function loadJSONFile(filePath) {
+  const loadJSONFile = async (filePath) => {
     try {
       const response = await fetch(filePath);
       const json = await response.json();
@@ -171,7 +174,7 @@ async function main() {
     } catch (error) {
       console.error('Error loading JSON file:', error);
     }
-  }
+  };
   GCW.tools = await loadJSONFile(jsonFilePath);
   GCW.selection;
 
@@ -208,7 +211,7 @@ async function main() {
 
   // Messages from content script
   browser.runtime.onMessage.addListener(handleMessage);
-}
+};
 
 const GCW = {};
 GCW.tools = [];

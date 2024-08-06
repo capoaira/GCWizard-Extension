@@ -13,23 +13,28 @@
 
   <body>
     <div id="gcw_analyze">
-      <h1 i18n="analyze_owner"></h1>
+      <div class="inline">
+        <h1 fill="name"></h1<h1 fill="name"></h1>
+        <h1>-</h1>
+        <h1 fill="gccode"></h1>
+      </div>
+      <h2 i18n="analyze_owner"></h2>
       <div id="gcw_analyze_owner">
         <span i18n="analyze_owner" append=":"></span>
         <span fill="owner"></span>
         <span i18n="analyze_pseudonym" append=":"></span>
         <span fill="pseudonym"></span>
       </div>
-      <h1 i18n="analyze_description"></h1>
+      <h2 i18n="analyze_description"></h2>
       <div class="gcw_toggle" i18n="analyze_show_html_source" key="analyze_html_source" checked></div>
       <div class="gcw_toggle" i18n="analyze_show_comments" key="analyze_show_comments" checked></div>
-      <div class="gcw_toggle" i18n="analyze_show_html_syntax" key="analyze_html_syntax"></div>
-      <div class="gcw_toggle" i18n="analyze_show_html_format" key="analyze_html_structure"></div>
+      <div class="gcw_toggle" i18n="analyze_show_html_syntax" key="analyze_html_syntax" checked></div>
+      <div class="gcw_toggle" i18n="analyze_show_html_format" key="analyze_html_structure" checked></div>
       <div id="gcw_analyze_listing">
         <div id="gcw_analyze_listing_content"></div>
       </div>
-      <div style="display:flex;align-items:center;gap:1em;">
-        <h1 i18n="analyze_hint"></h1>
+      <div class="inline">
+        <h2 i18n="analyze_hint"></h2>
         <span i18n="analyze_hint_without_colors"></span>
       </div>
       <div id="gcw_analyze_hint">

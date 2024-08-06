@@ -101,6 +101,10 @@ const main = () => {
         .attr('href')
         .match(/\?owner\[0\]=(.*?)&/)[1],
       pseudonym: $('#ctl00_ContentBody_mcd1 > a').html(),
+      gccode: $(
+        '#ctl00_ContentBody_CoordInfoLinkControl1_uxCoordInfoCode'
+      ).html(),
+      name: $('#ctl00_ContentBody_CacheName').html(),
     };
     // Sending message to open the new tab
     browser.runtime.sendMessage({

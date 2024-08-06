@@ -120,17 +120,12 @@ $(document).ready(async () => {
     }
   };
 
-  // Retrieve the data from storage and update the page
-  const updatePage = (data) => {
-    $('#gcw_analyze_hint').html(`
-      <div style="display:flex;align-items:center;gap:1em;">
-        <h1>${GCW.i18n('analyze_hint')}</h1> ${GCW.i18n('analyze_hint_without_colors')}
-      </div>
-      <p>${data.hint.replace(/<(?!(br|img)).*?>/gim, '')}</p>
-    `);
-  };
-
-  const fillTemplate = async (data) => {
+  const fillTemplate = async () => {
+    // Hint
+    data.hint = data.hint.replace(/<(?!(br|img)).*?>/gim, '');
+    // Title
+    document.title = `${data.gccode} - ${data.name}`;
+    /* General fill template */
     // Fill the template with localized strings
     const i18ns = $('[i18n]:not(.gcw_toggle)');
     for (const i18n of i18ns) {
@@ -167,6 +162,6 @@ $(document).ready(async () => {
   // Fetch the data from storage and call the updatePage function
   const data = await GCW.getVal('analyzeData');
   if (data) {
-    await fillTemplate(data);
+    await fillTemplate();
   }
 });
