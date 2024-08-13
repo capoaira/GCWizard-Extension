@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+#gcw_analyse {
+  margin: 0 auto;
+  width: max(80vh, 800px);
+  font-family: Arial, sans-serif;
+}
+
+#gcw_analyse h1 {
+  margin: 0.5em 0;
+}
+
+#gcw_analyse a {
+  color: var(--highlight-color)
+}
+
+#gcw_analyse_owner {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  column-gap: 1em;
+}
+
+#gcw_analyse_listing {
+  border: 2px solid var(--highlight-color);
+  padding: .5em;
+}
+
+#gcw_analyse_listing legend {
+  padding: 0 0.5em;
+}
+
+.inline {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.gcw_html_comment {
+  color: var(--html-comment);
+}
+
+.gcw_html_tag {
+  color: var(--html-tag);
+}
+
+.gcw_html_key {
+  color: var(--html-key);
+}
+
+.gcw_html_equal_sign {
+  color: var(--html-equal-sign);
+}
+
+.gcw_html_value {
+  color: var(--html-value);
+}
+
+.gcw_html_unicode {
+  color: var(--html-unicode);
+  font-style: italic;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}

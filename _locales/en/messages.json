@@ -30,49 +30,49 @@
         "message": "Open GeoTour"
     },
     
-    "analyze": {
-        "message": "Analyze"
+    "analyse": {
+        "message": "Analyse"
     },
-    "analyze_back_to_listing": {
+    "analyse_back_to_listing": {
         "message": "Back to the cache listing"
     },
-    "analyze_owner": {
+    "analyse_owner": {
         "message": "Owner"
     },
-    "analyze_pseudonym": {
+    "analyse_pseudonym": {
         "message": "Pseudonym"
     },
-    "analyze_description": {
+    "analyse_description": {
         "message": "Cache Description"
     },
-    "analyze_short_description": {
+    "analyse_short_description": {
         "message": "Short Description:"
     },
-    "analyze_long_description": {
+    "analyse_long_description": {
         "message": "Long Description:"
     },
-    "analyze_show_html_source": {
+    "analyse_show_html_source": {
         "message": "Show HTML source"
     },
-    "analyze_show_html_syntax": {
+    "analyse_show_html_syntax": {
         "message": "Highlight HTML syntax"
     },
-    "analyze_show_html_format": {
+    "analyse_show_html_format": {
         "message": "Format HTML"
     },
-    "analyze_show_comments": {
+    "analyse_show_comments": {
         "message": "Show HTML comments"
     },
-    "analyze_no_comments": {
+    "analyse_no_comments": {
         "message": "There are not HTML comments in the description"
     },
-    "analyze_hint": {
+    "analyse_hint": {
         "message": "Hint"
     },
-    "analyze_no_hint": {
+    "analyse_no_hint": {
         "message": "There is no Hint"
     },
-    "analyze_hint_without_colors": {
+    "analyse_hint_without_colors": {
         "message": "(without style)"
     },
     
